@@ -9,7 +9,7 @@ class Field extends Component {
         return(
             <div className="input-wrap">
                 <label htmlFor={this.props.name}>{this.props.labelText}</label>
-                <input type={this.props.type} name={this.props.name}/>
+                <input type={this.props.type} name={this.props.name} defaultValue={this.props.val}/>
             </div>
         )
     }

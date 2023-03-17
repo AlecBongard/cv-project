@@ -18,12 +18,13 @@ class Section extends Component {
     }
 
 
-    generateFields(){
+    generateFields(vals=[]){
         const fields = this.props.fields;
 
-        const fieldComps = fields.map(field=>{
+        const fieldComps = fields.map((field, i)=>{
+            
             return (
-                <Field name={field.name} labelText={field.labelText} type={field.type} key={uniqid()}></Field>
+                <Field name={field.name} labelText={field.labelText} type={field.type} key={uniqid()} val={vals[i]}></Field>
             )
         })
 
@@ -41,13 +42,28 @@ class Section extends Component {
     }
 
     getVals(){
-        const valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
-        const vals = Array.from(valNodes).map((node, i)=>{
-            const val = node.value;
+        let valNodes;
+        let vals;
 
+        if(this.state.posted){
+            valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
 
-            return val;
-        });
+            vals = Array.from(valNodes).map((node, i)=>{
+                const val = node.value;
+    
+    
+                return val;
+            });
+        }else{
+            valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .field-posted > .text-posted`);
+            
+            vals = Array.from(valNodes).map((node, i)=>{
+                const val = node.textContent;
+    
+    
+                return val;
+            });
+        }
 
         return vals;
     }
@@ -69,11 +85,11 @@ class Section extends Component {
 
     render(){
         let fields;
+        let vals = this.getVals();
 
         if(!this.state.posted){
-            fields = this.generateFields();
+            fields = this.generateFields(vals);
         }else{
-            let vals = this.getVals();
             fields = this.makePostComps(vals);
         }
 
