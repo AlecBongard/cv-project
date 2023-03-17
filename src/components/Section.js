@@ -86,11 +86,14 @@ class Section extends Component {
     render(){
         let fields;
         let vals = this.getVals();
+        let btnText;
 
         if(!this.state.posted){
             fields = this.generateFields(vals);
+            btnText = "Submit Section";
         }else{
             fields = this.makePostComps(vals);
+            btnText = "Edit Section";
         }
 
         return (
@@ -98,7 +101,7 @@ class Section extends Component {
                 <p className="form-title">{this.props.sectionName}</p>
                 <form>
                     {fields}
-                    <button type="submit" onClick={this.onPost}>Submit Section</button>
+                    <button type="submit" onClick={this.onPost}>{btnText}</button>
                 </form>
 
             </div>
