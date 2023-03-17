@@ -14,3 +14,5 @@ class PostedField extends Component {
         )
     }
 }
+
+export default PostedField;

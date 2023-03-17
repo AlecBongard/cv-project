@@ -8,7 +8,7 @@ class App extends Component{
 
   render(){
     return (<div>
-      <Section sectionName="General Info" fields={[{
+      <Section sectionID="general" sectionName="General Info" fields={[{
         name: "fname",
         labelText: "First Name",
         type: "text",
