@@ -14,7 +14,7 @@ class Section extends Component {
         this.generateFields = this.generateFields.bind(this);
         this.makePostComps = this.makePostComps.bind(this);
         this.getVals = this.getVals.bind(this);
-        this.checkPosted = this.checkPosted.bind(this);
+        this.onPost = this.onPost.bind(this);
     }
 
 
@@ -34,18 +34,13 @@ class Section extends Component {
         const fields = this.props.fields;
 
         const postComps = fields.map((field, i)=>{
-           return <PostedField labelText={field.labelText} key={uniqid()}>{vals[i]}</PostedField>
-        })
-
-        this.setState({
-            posted: true,
+           return <PostedField labelText={field.labelText} key={uniqid()} fieldText={vals[i]}></PostedField>
         })
 
         return postComps;
     }
 
-    getVals(e){
-        e.preventDefault();
+    getVals(){
         const valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
         const vals = Array.from(valNodes).map((node, i)=>{
             const val = node.value;
@@ -54,33 +49,40 @@ class Section extends Component {
             return val;
         });
 
-        console.log(vals);
+        return vals;
     }
 
-    checkPosted(){
-        const vals = this.getVals();
+    onPost(e){
+        e.preventDefault();
 
         if(this.state.posted){
             this.setState({
-                fields: this.makePostComps(vals),
+                posted: false,
             })
         }else{
             this.setState({
-                fields: this.generateFields(vals),
+                posted: true,
             })
         }
     }
 
 
     render(){
-        const fields = this.generateFields();
+        let fields;
+
+        if(!this.state.posted){
+            fields = this.generateFields();
+        }else{
+            let vals = this.getVals();
+            fields = this.makePostComps(vals);
+        }
 
         return (
             <div className="section" id={this.props.sectionID}>
                 <p className="form-title">{this.props.sectionName}</p>
                 <form>
                     {fields}
-                    <button type="submit" onClick={this.getVals}>Submit Section</button>
+                    <button type="submit" onClick={this.onPost}>Submit Section</button>
                 </form>
 
             </div>
