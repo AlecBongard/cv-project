@@ -2,6 +2,7 @@ import react, { Component } from "react";
 import Field from "./Field"
 import PostedField from "./PostedField";
 import uniqid from "uniqid";
+import "../styles/section.css";
 
 class Section extends Component {
     constructor(props){
