@@ -12,12 +12,23 @@ class Field extends Component {
         if(this.props.type==="textarea"){
             return <textarea name={this.props.name}></textarea>
         }else{
-            return <input type={this.props.type}
-             name={this.props.name} 
-             defaultValue={this.props.val}
-             onClick={this.props.onClick}
-             onChange={this.props.onChange}
-             required/>
+            if(this.props.isRequired){
+                console.log("a");
+                return <input type={this.props.type}
+                name={this.props.name} 
+                defaultValue={this.props.val}
+                onClick={this.props.onClick}
+                onChange={this.props.onChange}
+                required/>
+            }else{
+                return <input type={this.props.type}
+                name={this.props.name} 
+                defaultValue={this.props.val}
+                onClick={this.props.onClick}
+                onChange={this.props.onChange}
+                />
+            }
+            
         }
     }
 

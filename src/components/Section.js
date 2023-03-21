@@ -32,7 +32,8 @@ class Section extends Component {
                 type={field.type} key={uniqid()} 
                 val={vals[i]} 
                 onChange={this.checkFormValid}
-                onClick={this.checkFormValid}>
+                onClick={this.checkFormValid}
+                isRequired={field.isRequired}>
                 </Field>
             )
         })
