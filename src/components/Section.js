@@ -27,7 +27,13 @@ class Section extends Component {
         const fieldComps = fields.map((field, i)=>{
             
             return (
-                <Field name={field.name} labelText={field.labelText} type={field.type} key={uniqid()} val={vals[i]} onChange={this.checkFormValid}></Field>
+                <Field name={field.name} 
+                labelText={field.labelText} 
+                type={field.type} key={uniqid()} 
+                val={vals[i]} 
+                onChange={this.checkFormValid}
+                onClick={this.checkFormValid}>
+                </Field>
             )
         })
 
@@ -106,6 +112,22 @@ class Section extends Component {
                     validities.splice(i, 1, true);
                     fieldNodes[i].classList.remove("field-valid");
                     fieldNodes[i].classList.remove("field-invalid");
+                }
+            }else if(field.type === "date"){
+                const now = new Date();
+                const inputDate = field.valueAsDate;
+
+                if(field.hasAttribute("required")){
+                    if(!field.value || inputDate > now){
+                        validities.splice(i, 1, false);
+                        fieldNodes[i].classList.add("field-invalid");
+                    }else{
+                        validities.splice(i, 1, true);
+                        fieldNodes[i].classList.remove("field-valid");
+                        fieldNodes[i].classList.remove("field-invalid");
+                    }
+                }else{
+                    validities.splice(i, 1, true);
                 }
             }
         })

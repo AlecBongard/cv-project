@@ -14,7 +14,8 @@ class Field extends Component {
         }else{
             return <input type={this.props.type}
              name={this.props.name} 
-             defaultValue={this.props.val} 
+             defaultValue={this.props.val}
+             onClick={this.props.onClick}
              onChange={this.props.onChange}
              required/>
         }

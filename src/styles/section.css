@@ -9,4 +9,5 @@
 .field-invalid{
     border: 2px solid red;
     border-radius: 2px;
+    outline: none;
 }
