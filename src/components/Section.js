@@ -17,6 +17,7 @@ class Section extends Component {
         this.makePostComps = this.makePostComps.bind(this);
         this.getVals = this.getVals.bind(this);
         this.onPost = this.onPost.bind(this);
+        this.checkFormValid = this.checkFormValid.bind(this);
     }
 
 
@@ -26,7 +27,7 @@ class Section extends Component {
         const fieldComps = fields.map((field, i)=>{
             
             return (
-                <Field name={field.name} labelText={field.labelText} type={field.type} key={uniqid()} val={vals[i]}></Field>
+                <Field name={field.name} labelText={field.labelText} type={field.type} key={uniqid()} val={vals[i]} onChange={this.checkFormValid}></Field>
             )
         })
 
@@ -86,11 +87,13 @@ class Section extends Component {
                     validities.splice(i, 1, true);
 
                     fieldNodes[i].classList.add("field-valid");
+                    fieldNodes[i].classList.remove("field-invalid");
                 }
             }else if(field.type === "email"){
                 if(fieldNodes[i].checkValidity()){
                     validities.splice(i, 1, true);
                     fieldNodes[i].classList.add("field-valid");
+                    fieldNodes[i].classList.remove("field-invalid");
                 }else{
                     validities.splice(i, 1, false);
                     fieldNodes[i].classList.add("field-invalid");
@@ -101,7 +104,8 @@ class Section extends Component {
                     fieldNodes[i].classList.add("field-invalid");
                 }else{
                     validities.splice(i, 1, true);
-                    fieldNodes[i].classList.add("field-invalid");
+                    fieldNodes[i].classList.remove("field-valid");
+                    fieldNodes[i].classList.remove("field-invalid");
                 }
             }
         })

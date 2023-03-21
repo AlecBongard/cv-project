@@ -5,3 +5,8 @@
 .section{
     margin: 10px;
 }
+
+.field-invalid{
+    border: 2px solid red;
+    border-radius: 2px;
+}
