@@ -13,7 +13,6 @@ class Field extends Component {
             return <textarea name={this.props.name}></textarea>
         }else{
             if(this.props.isRequired){
-                console.log("a");
                 return <input type={this.props.type}
                 name={this.props.name} 
                 defaultValue={this.props.val}
