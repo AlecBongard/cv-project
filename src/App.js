@@ -24,7 +24,7 @@ class App extends Component{
         {
           name: "phone",
           labelText: "Phone Number",
-          type: "tel"
+          type: "tel",
         },
         {
           name: "email",

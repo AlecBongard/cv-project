@@ -10,6 +10,7 @@ class Section extends Component {
 
         this.state = {
             posted: false,
+            isValid: Array(this.props.fields.length).fill(null),
         };
 
         this.generateFields = this.generateFields.bind(this);
@@ -69,6 +70,45 @@ class Section extends Component {
         return vals;
     }
 
+    checkFormValid(){
+        const fieldNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
+        const fieldArr = Array.from(fieldNodes);
+        const validities = [...this.state.isValid];
+
+        fieldArr.forEach((field, i)=>{
+
+            if(field.type === "text"){
+                if(!field.value){
+                    validities.splice(i, 1, false);
+
+                    fieldNodes[i].classList.add("field-invalid");
+                }else{
+                    validities.splice(i, 1, true);
+
+                    fieldNodes[i].classList.add("field-valid");
+                }
+            }else if(field.type === "email"){
+                if(fieldNodes[i].checkValidity()){
+                    validities.splice(i, 1, true);
+                    fieldNodes[i].classList.add("field-valid");
+                }else{
+                    validities.splice(i, 1, false);
+                    fieldNodes[i].classList.add("field-invalid");
+                }
+            }else if(field.type === "tel"){
+                if(!field.value || field.value.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/) === null){
+                    validities.splice(i, 1, false);
+                    fieldNodes[i].classList.add("field-invalid");
+                }else{
+                    validities.splice(i, 1, true);
+                    fieldNodes[i].classList.add("field-invalid");
+                }
+            }
+        })
+
+        return validities;
+    }
+
     onPost(e){
         e.preventDefault();
 
@@ -77,14 +117,20 @@ class Section extends Component {
                 posted: false,
             })
         }else{
-            this.setState({
-                posted: true,
-            })
+            const validities = this.checkFormValid();
+
+            if(validities.every(val=>val)){
+                this.setState({
+                    posted: true,
+                    isValid: [...validities],
+                })
+            }
         }
     }
 
 
     render(){
+
         let fields;
         let vals = this.getVals();
         let btnText;
