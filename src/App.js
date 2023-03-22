@@ -28,6 +28,7 @@ class App extends Component{
           labelText: "Phone Number",
           type: "tel",
           isRequired: true,
+          placeholder: "123-456-7890"
         },
         {
           name: "email",

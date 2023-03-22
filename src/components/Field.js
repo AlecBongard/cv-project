@@ -18,6 +18,7 @@ class Field extends Component {
                 defaultValue={this.props.val}
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
+                placeholder={this.props.placeholder}
                 required/>
             }else{
                 return <input type={this.props.type}
@@ -25,6 +26,7 @@ class Field extends Component {
                 defaultValue={this.props.val}
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
+                placeholder={this.props.placeholder}
                 />
             }
             

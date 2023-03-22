@@ -11,6 +11,7 @@ class Section extends Component {
         this.state = {
             posted: false,
             isValid: Array(this.props.fields.length).fill(null),
+            error: false,
         };
 
         this.generateFields = this.generateFields.bind(this);
@@ -33,7 +34,8 @@ class Section extends Component {
                 val={vals[i]} 
                 onChange={this.checkFormValid}
                 onClick={this.checkFormValid}
-                isRequired={field.isRequired}>
+                isRequired={field.isRequired}
+                placeholder={field.placeholder}>
                 </Field>
             )
         })
@@ -77,6 +79,7 @@ class Section extends Component {
 
         return vals;
     }
+
 
     checkFormValid(){
         const fieldNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
@@ -147,9 +150,14 @@ class Section extends Component {
             const validities = this.checkFormValid();
 
             if(validities.every(val=>val)){
-                this.setState({
+                this.setState({                   
                     posted: true,
                     isValid: [...validities],
+                    error: false,
+                })
+            }else{
+                this.setState({
+                    error: true,
                 })
             }
         }
@@ -161,6 +169,8 @@ class Section extends Component {
         let fields;
         let vals = this.getVals();
         let btnText;
+        let errorText;
+
 
         if(!this.state.posted){
             fields = this.generateFields(vals);
@@ -170,6 +180,12 @@ class Section extends Component {
             btnText = "Edit Section";
         }
 
+        if(this.state.error){
+            errorText = "Please enter all data in the proper format."
+        }else{
+            errorText = "";
+        }
+
         return (
             <div className="section" id={this.props.sectionID}>
                 <p className="form-title">{this.props.sectionName}</p>
@@ -177,7 +193,7 @@ class Section extends Component {
                     {fields}
                     <button type="submit" onClick={this.onPost}>{btnText}</button>
                 </form>
-
+            <p className="error-text">{errorText}</p>
             </div>
         )
     }
