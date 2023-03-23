@@ -4,10 +4,26 @@
 
 .section{
     margin: 10px;
+    background-color: #29292e;
+    color: #fff;
+    padding: 25px 0px;
+    border-radius: 5px;
 }
 
-.field-invalid{
-    border: 2px solid red;
-    border-radius: 2px;
+input{
     outline: none;
+    border: none;
+    border-bottom: 3px solid #c8c8c8;
+}
+
+.field-invalid:focus{
+    border: none;
+    border-bottom: 3px solid red;
+    outline: none;
+}
+
+
+.field-valid:focus{
+    border: none;
+    border-bottom: 3px solid rgb(81, 255, 81);
 }

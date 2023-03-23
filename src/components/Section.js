@@ -114,7 +114,7 @@ class Section extends Component {
                     fieldNodes[i].classList.add("field-invalid");
                 }else{
                     validities.splice(i, 1, true);
-                    fieldNodes[i].classList.remove("field-valid");
+                    fieldNodes[i].classList.add("field-valid");
                     fieldNodes[i].classList.remove("field-invalid");
                 }
             }else if(field.type === "date"){
@@ -127,7 +127,7 @@ class Section extends Component {
                         fieldNodes[i].classList.add("field-invalid");
                     }else{
                         validities.splice(i, 1, true);
-                        fieldNodes[i].classList.remove("field-valid");
+                        fieldNodes[i].classList.add("field-valid");
                         fieldNodes[i].classList.remove("field-invalid");
                     }
                 }else{

@@ -1,4 +1,5 @@
 import react, { Component } from "react";
+import "../styles/posted.css";
 
 class PostedField extends Component {
     constructor(props){

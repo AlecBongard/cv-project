@@ -1,6 +1,10 @@
 .input-wrap{
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    margin: 5px 0px;
+    width: 20vw;
+    background-color: #c8c8c8;
+    color: #444444;
 }
+
 
