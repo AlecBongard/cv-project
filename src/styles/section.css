@@ -4,17 +4,24 @@
 
 .section{
     margin: 10px;
-    background-color: #29292e;
-    color: #fff;
+    background-color: #334155;
+    color: #e2e8f0;
     padding: 25px 0px;
     border-radius: 5px;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items:  center;
 }
 
-input{
+input, textarea{
     outline: none;
     border: none;
     border-bottom: 3px solid #c8c8c8;
+    background-color: #64748b;
+    color: #ffffff;
 }
+
 
 .field-invalid:focus{
     border: none;
