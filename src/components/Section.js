@@ -170,14 +170,17 @@ class Section extends Component {
         let vals = this.getVals();
         let btnText;
         let errorText;
+        let btnClass;
 
 
         if(!this.state.posted){
             fields = this.generateFields(vals);
             btnText = "Submit Section";
+            btnClass = `form-btn submit-btn`;
         }else{
             fields = this.makePostComps(vals);
             btnText = "Edit Section";
+            btnClass = `form-btn edit-btn`;
         }
 
         if(this.state.error){
@@ -189,11 +192,11 @@ class Section extends Component {
         return (
             <div className="section" id={this.props.sectionID}>
                 <p className="form-title">{this.props.sectionName}</p>
-                <form>
+                <form className="section-form">
                     {fields}
-                    <button type="submit" onClick={this.onPost}>{btnText}</button>
+                    <p className="error-text">{errorText}</p>
+                    <button type="submit" onClick={this.onPost} className={btnClass}>{btnText}</button>
                 </form>
-            <p className="error-text">{errorText}</p>
             </div>
         )
     }
