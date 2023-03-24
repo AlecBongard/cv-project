@@ -5,4 +5,14 @@ p{
 .text-posted{
     box-sizing: border-box;
     margin: 3px 0px;
+    font-size: 15px;
+}
+
+.field-posted{
+    height: 52px;
+    margin: 5px;
+}
+
+.label-posted{
+    margin-bottom: 3px;
 }
