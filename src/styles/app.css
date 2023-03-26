@@ -5,7 +5,18 @@
     font-style: regular;
 }
 
+@media (max-width: 800px) {
+    .app-wrap > .section-wrap{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
+    .section{
+        min-width: 75%;
+    }
+}
 
 .app-title{
     font-size: 36px;
