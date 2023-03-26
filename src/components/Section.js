@@ -10,7 +10,11 @@ class Section extends Component {
 
         this.state = {
             posted: false,
-            isValid: Array(this.props.fields.length).fill(null),
+            isValid: Array(this.props.fields).map(field=>{
+                if(field.type !== "textarea"){
+                    return null
+                }
+            }),
             error: false,
         };
 

@@ -80,7 +80,7 @@ class App extends Component{
             name: "description",
             labelText: "Job Description",
             type: "textarea",
-            isRequired: true,
+            isRequired: false,
           },
           {
             name: "start",
