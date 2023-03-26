@@ -7,10 +7,18 @@ class PostedField extends Component {
     }
 
     render(){
+        let submittedText;
+
+        if(this.props.fieldText){
+            submittedText = this.props.fieldText;
+        }else{
+            submittedText = "N/A";
+        }
+
         return (
             <div className="field-posted">
                 <p className="label-posted">{this.props.labelText}</p>
-                <p className="text-posted">{this.props.fieldText}</p>
+                <p className="text-posted">{submittedText}</p>
             </div>
         )
     }
