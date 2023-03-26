@@ -81,3 +81,9 @@ input{
 .edit-btn:hover{
     background-color: #c8d49f;
 }
+
+.error-text{
+    width: 100%;
+    margin: 5px 0px;
+    text-align: center;
+}

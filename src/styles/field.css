@@ -12,4 +12,9 @@
     margin: 2px 4px;
 }
 
+.label-required:after{
+    content: "*";
+    color: rgb(255, 146, 146);
+}
+
 

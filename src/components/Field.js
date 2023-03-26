@@ -34,9 +34,17 @@ class Field extends Component {
     }
 
     render(){
+        let labelClass;
+
+        if(this.props.isRequired){
+            labelClass = "field-label label-required";
+        }else{
+            labelClass = "field-label"
+        }
+
         return(
             <div className="input-wrap">
-                <label htmlFor={this.props.name} className="field-label">{this.props.labelText}</label>
+                <label htmlFor={this.props.name} className={labelClass}>{this.props.labelText}</label>
                 {this.makeField()}
             </div>
         )
