@@ -196,6 +196,7 @@ class Section extends Component {
         return (
             <div className="section" id={this.props.sectionID}>
                 <p className="form-title">{this.props.sectionName}</p>
+                <p className="required-legend">*required</p>
                 <form className="section-form">
                     {fields}
                     <p className="error-text">{errorText}</p>

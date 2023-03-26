@@ -87,3 +87,10 @@ input{
     margin: 5px 0px;
     text-align: center;
 }
+
+.required-legend{
+    text-align: end;
+    width: 98%;
+    font-size: 12px;
+    color: var(--invalid);
+}
