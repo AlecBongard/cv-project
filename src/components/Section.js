@@ -93,6 +93,7 @@ class Section extends Component {
                     validities.splice(i, 1, false);
 
                     fieldNodes[i].classList.add("field-invalid");
+                    fieldNodes[i].classList.remove("field-valid");
                 }else{
                     validities.splice(i, 1, true);
 
@@ -107,11 +108,13 @@ class Section extends Component {
                 }else{
                     validities.splice(i, 1, false);
                     fieldNodes[i].classList.add("field-invalid");
+                    fieldNodes[i].classList.remove("field-valid");
                 }
             }else if(field.type === "tel"){
                 if(!field.value || field.value.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/) === null){
                     validities.splice(i, 1, false);
                     fieldNodes[i].classList.add("field-invalid");
+                    fieldNodes[i].classList.remove("field-valid");
                 }else{
                     validities.splice(i, 1, true);
                     fieldNodes[i].classList.add("field-valid");
@@ -125,6 +128,7 @@ class Section extends Component {
                     if(!field.value || inputDate > now){
                         validities.splice(i, 1, false);
                         fieldNodes[i].classList.add("field-invalid");
+                        fieldNodes[i].classList.remove("field-valid");
                     }else{
                         validities.splice(i, 1, true);
                         fieldNodes[i].classList.add("field-valid");
