@@ -1,33 +1,20 @@
-import react, { Component } from "react";
+import react, { Component, useState } from "react";
 import Field from "./Field"
 import PostedField from "./PostedField";
 import uniqid from "uniqid";
 import "../styles/section.css";
 
-class Section extends Component {
-    constructor(props){
-        super(props)
+const Section = (props)=>{
+    const [posted, setPosted] = useState(false);
+    const [isValid, setisValid] = useState(Array(props.fields).map(field=>{
+        if(field.type !== "textarea"){
+            return null
+        }
+    }));
+    const [error, setError] = useState(false);
 
-        this.state = {
-            posted: false,
-            isValid: Array(this.props.fields).map(field=>{
-                if(field.type !== "textarea"){
-                    return null
-                }
-            }),
-            error: false,
-        };
-
-        this.generateFields = this.generateFields.bind(this);
-        this.makePostComps = this.makePostComps.bind(this);
-        this.getVals = this.getVals.bind(this);
-        this.onPost = this.onPost.bind(this);
-        this.checkFormValid = this.checkFormValid.bind(this);
-    }
-
-
-    generateFields(vals=[]){
-        const fields = this.props.fields;
+    function generateFields(vals=[]){
+        const fields = props.fields;
 
         const fieldComps = fields.map((field, i)=>{
             
@@ -36,8 +23,8 @@ class Section extends Component {
                 labelText={field.labelText} 
                 type={field.type} key={uniqid()} 
                 val={vals[i]} 
-                onChange={this.checkFormValid}
-                onClick={this.checkFormValid}
+                onChange={checkFormValid}
+                onClick={checkFormValid}
                 isRequired={field.isRequired}
                 placeholder={field.placeholder}>
                 </Field>
@@ -47,8 +34,8 @@ class Section extends Component {
         return fieldComps;
     }
 
-    makePostComps(vals){
-        const fields = this.props.fields;
+    function makePostComps(vals){
+        const fields = props.fields;
 
         const postComps = fields.map((field, i)=>{
            return <PostedField labelText={field.labelText} key={uniqid()} fieldText={vals[i]}></PostedField>
@@ -57,12 +44,12 @@ class Section extends Component {
         return postComps;
     }
 
-    getVals(){
+    function getVals(){
         let valNodes;
         let vals;
 
-        if(this.state.posted){
-            valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
+        if(posted){
+            valNodes = document.querySelectorAll(`#${props.sectionID} > form > .input-wrap > input`);
 
             vals = Array.from(valNodes).map((node, i)=>{
                 const val = node.value;
@@ -71,7 +58,7 @@ class Section extends Component {
                 return val;
             });
         }else{
-            valNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .field-posted > .text-posted`);
+            valNodes = document.querySelectorAll(`#${props.sectionID} > form > .field-posted > .text-posted`);
             
             vals = Array.from(valNodes).map((node, i)=>{
                 const val = node.textContent;
@@ -84,11 +71,10 @@ class Section extends Component {
         return vals;
     }
 
-
-    checkFormValid(){
-        const fieldNodes = document.querySelectorAll(`#${this.props.sectionID} > form > .input-wrap > input`);
+    function checkFormValid(){
+        const fieldNodes = document.querySelectorAll(`#${props.sectionID} > form > .input-wrap > input`);
         const fieldArr = Array.from(fieldNodes);
-        const validities = [...this.state.isValid];
+        const validities = [...isValid];
 
         fieldArr.forEach((field, i)=>{
 
@@ -147,68 +133,60 @@ class Section extends Component {
         return validities;
     }
 
-    onPost(e){
+    function onPost(e){
         e.preventDefault();
 
-        if(this.state.posted){
-            this.setState({
-                posted: false,
-            })
+        if(posted){
+            setPosted(false);
         }else{
-            const validities = this.checkFormValid();
+            const validities = checkFormValid();
 
             if(validities.every(val=>val)){
-                this.setState({                   
-                    posted: true,
-                    isValid: [...validities],
-                    error: false,
-                })
+                setPosted(true);
+                setisValid([...validities]);
+                setError(false);
             }else{
-                this.setState({
-                    error: true,
-                })
+                setError(true);
             }
         }
     }
 
 
-    render(){
-
         let fields;
-        let vals = this.getVals();
+        let vals = getVals();
         let btnText;
         let errorText;
         let btnClass;
 
 
-        if(!this.state.posted){
-            fields = this.generateFields(vals);
+        if(!posted){
+            fields = generateFields(vals);
             btnText = "Submit Section";
             btnClass = `form-btn submit-btn`;
         }else{
-            fields = this.makePostComps(vals);
+            fields = makePostComps(vals);
             btnText = "Edit Section";
             btnClass = `form-btn edit-btn`;
         }
 
-        if(this.state.error){
+        if(error){
             errorText = "Please enter all data in the proper format."
         }else{
             errorText = "";
         }
 
         return (
-            <div className="section" id={this.props.sectionID}>
-                <p className="form-title">{this.props.sectionName}</p>
+            <div className="section" id={props.sectionID}>
+                <p className="form-title">{props.sectionName}</p>
                 <p className="required-legend">*required</p>
                 <form className="section-form">
                     {fields}
                     <p className="error-text">{errorText}</p>
-                    <button type="submit" onClick={this.onPost} className={btnClass}>{btnText}</button>
+                    <button type="submit" onClick={onPost} className={btnClass}>{btnText}</button>
                 </form>
             </div>
         )
-    }
 }
+
 
 export default Section;
