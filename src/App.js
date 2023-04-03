@@ -2,12 +2,7 @@ import react, {Component} from "react";
 import Section from "./components/Section";
 import "./styles/app.css";
 
-class App extends Component{
-  constructor(props){
-    super(props)
-  }
-
-  render(){
+const App = () => {
     return (<div className="app-wrap">
       <p className="app-title">Resume</p>
       <div className="section-wrap">
@@ -96,8 +91,7 @@ class App extends Component{
           }
         ]}></Section>
       </div>
-    </div>)
-  }
+    </div>);
 }
 
 export default App;

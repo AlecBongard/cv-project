@@ -1,54 +1,46 @@
 import react, { Component } from "react";
 import "../styles/field.css";
 
-class Field extends Component {
-    constructor(props){
-        super(props);
-
-        this.makeField = this.makeField.bind(this);
-    }
-
-    makeField(){
-        if(this.props.type==="textarea"){
-            return <textarea name={this.props.name}></textarea>
+const Field = (props)=>{
+    function makeField(){
+        if(props.type==="textarea"){
+            return <textarea name={props.name}></textarea>
         }else{
-            if(this.props.isRequired){
-                return <input type={this.props.type}
-                name={this.props.name} 
-                defaultValue={this.props.val}
-                onClick={this.props.onClick}
-                onChange={this.props.onChange}
-                placeholder={this.props.placeholder}
+            if(props.isRequired){
+                return <input type={props.type}
+                name={props.name} 
+                defaultValue={props.val}
+                onClick={props.onClick}
+                onChange={props.onChange}
+                placeholder={props.placeholder}
                 required/>
             }else{
-                return <input type={this.props.type}
-                name={this.props.name} 
-                defaultValue={this.props.val}
-                onClick={this.props.onClick}
-                onChange={this.props.onChange}
-                placeholder={this.props.placeholder}
+                return <input type={props.type}
+                name={props.name} 
+                defaultValue={props.val}
+                onClick={props.onClick}
+                onChange={props.onChange}
+                placeholder={props.placeholder}
                 />
             }
             
         }
     }
 
-    render(){
-        let labelClass;
+    let labelClass;
 
-        if(this.props.isRequired){
-            labelClass = "field-label label-required";
-        }else{
-            labelClass = "field-label"
-        }
-
-        return(
-            <div className="input-wrap">
-                <label htmlFor={this.props.name} className={labelClass}>{this.props.labelText}</label>
-                {this.makeField()}
-            </div>
-        )
+    if(props.isRequired){
+        labelClass = "field-label label-required";
+    }else{
+        labelClass = "field-label"
     }
+
+    return(
+        <div className="input-wrap">
+            <label htmlFor={props.name} className={labelClass}>{props.labelText}</label>
+            {makeField()}
+        </div>
+    )
 }
 
 export default Field;
